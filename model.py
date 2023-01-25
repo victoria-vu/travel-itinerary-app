@@ -147,6 +147,8 @@ class Location(db.Model):
     location_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     location_name = db.Column(db.String)
     map_id = db.Column(db.Integer, db.ForeignKey("maps.map_id"))
+    latitude = db.Column(db.Integer)
+    longitude= db.Column(db.Integer)
 
     map = db.relationship("Map", back_populates="location")
 

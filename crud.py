@@ -68,9 +68,12 @@ def create_map(name, description):
     return map
 
 
-def create_location():
+def create_location(name, latitude, longitude):
     """Create and return a location on a map."""
-    pass
+    
+    location = Location(location_name=name, latitude=latitude, longitude=longitude)
+
+    return location
 
 
 if __name__ == '__main__':
