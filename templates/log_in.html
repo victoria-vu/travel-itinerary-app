@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Welcome Back!</h1>
+<h2>Log In to Your Account</h2>
+
+<form>
+    <div>
+        <label for="user-email">Email</label>
+        <input type="text" name="email" id="user-email">
+    </div>
+
+    <div>
+        <label for="user-email">Password</label>
+        <input type="text" name="password" id="user-password">
+    </div>
+
+    <div>
+        <button type="submit">Log In</button>
+    </div>
+</form>
+{% endblock %}
