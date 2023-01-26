@@ -16,10 +16,10 @@ def create_user(email, password, fname, lname):
     return user    
 
 
-def create_itinerary(name, start_date, end_date):
+def create_itinerary(user, name, start_date, end_date):
     """Create and return a new itinerary."""
     
-    itinerary = Itinerary(itinerary_name=name, start_date=start_date, end_date=end_date)
+    itinerary = Itinerary(user_id=user, itinerary_name=name, start_date=start_date, end_date=end_date)
 
     return itinerary
 
@@ -81,7 +81,7 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
     
-# Need to fix how to get all of user itinerary!
+
 def get_user_itineraries():
     """Return a list of existing itineraries for a user."""
 

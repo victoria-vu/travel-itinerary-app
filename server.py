@@ -19,40 +19,43 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route("/")
 def show_homepage():
-    """Shows the homepage."""
+    """Show the homepage."""
 
     return render_template("homepage.html")
 
 
 @app.route("/log-in")
 def show_login_page():
-    """Shows user the log in page."""
+    """Show user the log in page."""
     
-    return render_template("log_in.html")
+    return render_template("log-in.html")
 
 
 @app.route("/log-in", methods=["POST"])
 def login():
-    """Login user"""
+    """Log in an existing user."""
     email = request.form.get("email")
     password = request.form.get("password")
     user = crud.get_user_by_email(email=email)
     
     if not user:
         flash("The email you typed in does not exist. Please sign up for an account.")
+        return redirect("/log-in")
     elif user.password != password:
         flash("Incorrect password. Please try again.")
+        return redirect("/log-in")
     else:
-        session["user_email"] = user.fname
+        session["user_email"] = user.email
+        session["user_fname"] = user.fname
+        session["user_userid"] = user.user_id
+        return redirect("/dashboard")
     
-    return redirect("/dashboard")
-
     
 @app.route("/sign-up")
 def show_signup_page():
-    """Shows user the sign up page."""
+    """Show user the sign up page."""
 
-    return render_template("create_account.html")
+    return render_template("sign-up.html")
 
 
 @app.route("/sign-up", methods=["POST"])
@@ -78,28 +81,32 @@ def register_user():
     
     
 @app.route("/dashboard")
-def display_user_dashboard():
-    """Displays user dashboard."""
+def show_dashboard():
+    """Show user dashboard."""
 
-    return render_template("user_dashboard.html", name=session["user_email"])
+    return render_template("dashboard.html", name=session["user_fname"])
 
 
 @app.route("/create-itinerary")
 def show_create_itinerary_page():
-    """Shows user the create an itinerary page."""
+    """Show user the create an itinerary page."""
 
-    return render_template("create_itinerary.html")
+    return render_template("create-itinerary.html")
 
 
 @app.route("/create-itinerary", methods=["POST"])
 def user_itinerary():
     """Create an itinerary."""
 
+    # logged_in_user = session.get("user_email")
+
+    # user = crud.get_user_by_email(logged_in_user)
+    user = session["user_userid"]
     name = request.form.get("name")
     start_date = request.form.get("start-date")
     end_date = request.form.get("end-date")
 
-    itinerary = crud.create_itinerary(name, start_date, end_date)
+    itinerary = crud.create_itinerary(user, name, start_date, end_date)
     db.session.add(itinerary)
     db.session.commit()
 
@@ -108,9 +115,9 @@ def user_itinerary():
 
 @app.route("/customize-itinerary")
 def show_customize_itinerary_page():
-    """Displays page to customize an itinerary."""
+    """Show user the customize an itinerary page."""
 
-    return render_template("customize_itinerary.html")
+    return render_template("customize-itinerary.html")
 
 
 # @app.route("/view-itineraries")
