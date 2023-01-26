@@ -3,14 +3,27 @@
 {% block body %}
 <h1>Create Your Itinerary</h1>
 
-<div>
-    <h2>Itinerary Table</h2>
-</div>
+<form action="/create-itinerary" method="POST">
+    <div>
+        <label for="itinerary-name">Itinerary Name:</label>
+        <input type="text" name="name" id="itinerary-name">
+    </div>
 
-<div>
-    <h2>Itinerary Map</h2>
-</div>
+    <div>
+        <label for="itinerary-start">Start Date:</label>
+        <input type="date" name="start-date" id="itinerary-start">
+    </div>
 
+    <div>
+        <label for="itinerary-end">End Date:</label>
+        <input type="date" name="end-date" id="itinerary-end">
+    </div>
+
+
+    <div>
+        <button type="submit">Create New Itinerary</button>
+    </div>
+</form>
 {% endblock %} 
 
 

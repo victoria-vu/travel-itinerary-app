@@ -81,16 +81,11 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
     
+# Need to fix how to get all of user itinerary!
+def get_user_itineraries():
+    """Return a list of existing itineraries for a user."""
 
-# def login_user(email, password):
-#     """Return first name for log in if email and password exists."""
-
-#     user = User.query.filter(User.email == email).first()
-
-#     if user:
-#         if user.password == password:
-#             return user
-#     return False
+    return Itinerary.query.all()
 
 
 if __name__ == '__main__':

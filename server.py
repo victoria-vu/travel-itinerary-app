@@ -31,25 +31,6 @@ def show_login_page():
     return render_template("log_in.html")
 
 
-# @app.route("/log-in", methods=["POST"])
-# def login_existing_user():
-#     """Log in an existing user."""
-
-#     email = request.form.get("email")
-#     password = request.form.get("password")
-
-#     # If email and password match, login_user returns the user's first name.
-#     # Store the first name in the session.
-#     fname = crud.login_user(email, password)
-    
-#     if fname:
-#         session["name"] = fname
-#         flash("You are successfully logged in.")
-#     else:
-#         flash("The email you typed in does not exist. Please sign up for an account.")
-
-#     return redirect("/")
-
 @app.route("/log-in", methods=["POST"])
 def login():
     """Login user"""
@@ -65,10 +46,6 @@ def login():
         session["user_email"] = user.fname
     
     return redirect("/dashboard")
-
-
-# "user" key = user object
-# session["user"] = user
 
     
 @app.route("/sign-up")
@@ -112,6 +89,34 @@ def show_create_itinerary_page():
     """Shows user the create an itinerary page."""
 
     return render_template("create_itinerary.html")
+
+
+@app.route("/create-itinerary", methods=["POST"])
+def user_itinerary():
+    """Create an itinerary."""
+
+    name = request.form.get("name")
+    start_date = request.form.get("start-date")
+    end_date = request.form.get("end-date")
+
+    itinerary = crud.create_itinerary(name, start_date, end_date)
+    db.session.add(itinerary)
+    db.session.commit()
+
+    return redirect("/customize-itinerary")
+
+
+@app.route("/customize-itinerary")
+def show_customize_itinerary_page():
+    """Displays page to customize an itinerary."""
+
+    return render_template("customize_itinerary.html")
+
+
+# @app.route("/view-itineraries")
+# def show_all_itineraries():
+#     """Shows user all exisiting itineraries."""
+#     pass
 
 
 if __name__ == "__main__":
