@@ -76,6 +76,23 @@ def create_location(name, latitude, longitude):
     return location
 
 
+def get_user_by_email(email):
+    """Return a user with email if it exists."""
+
+    return User.query.filter(User.email == email).first()
+    
+
+# def login_user(email, password):
+#     """Return first name for log in if email and password exists."""
+
+#     user = User.query.filter(User.email == email).first()
+
+#     if user:
+#         if user.password == password:
+#             return user
+#     return False
+
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)

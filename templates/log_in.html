@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Welcome Back!</h1>
-<h2>Log In to Your Account</h2>
 
-<form>
+    {% for msg in get_flashed_messages() %}
+        <p class="flash-msg">{{ msg }}</p>
+    {% endfor %}
+
+
+<h1>Welcome!</h1>
+<h5>Log In to Your Account</h5>
+
+<form action="/log-in" method="POST">
     <div>
         <label for="user-email">Email</label>
         <input type="text" name="email" id="user-email">
