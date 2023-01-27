@@ -82,10 +82,10 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
     
 
-def get_user_itineraries():
-    """Return a list of existing itineraries for a user."""
+def get_user_itineraries(user_id):
+    """Return a list of existing itineraries for a particular user."""
 
-    return Itinerary.query.all()
+    return Itinerary.query.options(db.joinedload("user")).get(user_id)
 
 
 if __name__ == '__main__':

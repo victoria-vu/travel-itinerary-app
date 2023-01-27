@@ -84,7 +84,7 @@ def register_user():
 def show_dashboard():
     """Show user dashboard."""
 
-    return render_template("dashboard.html", name=session["user_fname"])
+    return render_template("dashboard.html", name=session["user_fname"], user_id=session["user_userid"])
 
 
 @app.route("/create-itinerary")
@@ -98,9 +98,6 @@ def show_create_itinerary_page():
 def user_itinerary():
     """Create an itinerary."""
 
-    # logged_in_user = session.get("user_email")
-
-    # user = crud.get_user_by_email(logged_in_user)
     user = session["user_userid"]
     name = request.form.get("name")
     start_date = request.form.get("start-date")
@@ -120,11 +117,23 @@ def show_customize_itinerary_page():
     return render_template("customize-itinerary.html")
 
 
-# @app.route("/view-itineraries")
-# def show_all_itineraries():
-#     """Shows user all exisiting itineraries."""
-#     pass
+@app.route("/view-itineraries")
+def show_all_itineraries():
+    """Show all exisiting itineraries of a particular user."""
+    
+    if "user_userid" in session:
+        itineraries = crud.get_user_itineraries(session["user_userid"])
+        return render_template("view-itineraries.html", itineraries=itineraries.itinerary_name)
+    return redirect("/dashboard")
 
+
+@app.route("/view-itinerary/<itinerary_id>")
+def view_an_itinerary(itinerary_id):
+    """Show one itinerary"""
+    #Use a CRUD function to look up itinerary_id 
+    #Use Jinja to show everything on the page 
+    
+    pass
 
 if __name__ == "__main__":
     connect_to_db(app)
