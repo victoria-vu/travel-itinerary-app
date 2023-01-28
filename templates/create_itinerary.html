@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'loggedinbase.html' %}
 
 
 {% block title %}Create Itinerary{% endblock %}
@@ -7,7 +7,7 @@
 {% block body %}
 <h1>Create Your Itinerary</h1>
 
-<form action="/create-itinerary" method="POST">
+<form action="/create_itinerary" method="POST">
     <div>
         <label for="itinerary-name">Itinerary Name:</label>
         <input type="text" name="name" id="itinerary-name">

@@ -17,7 +17,7 @@ app.jinja_env.undefined = StrictUndefined
 
 
 @app.route("/")
-def show_homepage():
+def homepage():
     """Show the homepage."""
 
     if "user_userid" in session:
@@ -26,26 +26,29 @@ def show_homepage():
     return render_template("homepage.html")
 
 
-@app.route("/log-in")
-def show_login_page():
+@app.route("/login")
+def login_page():
     """Show user the log in page."""
     
-    return render_template("log-in.html")
+    return render_template("login.html")
 
 
-@app.route("/log-in", methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login():
     """Log in an existing user."""
+    
     email = request.form.get("email")
     password = request.form.get("password")
     user = crud.get_user_by_email(email=email)
     
     if not user:
         flash("The email you typed in does not exist. Please sign up for an account.")
-        return redirect("/log-in")
+        return redirect("/login")
+    
     elif user.password != password:
         flash("Incorrect password. Please try again.")
-        return redirect("/log-in")
+        return redirect("/login")
+    
     else:
         session["user_email"] = user.email
         session["user_fname"] = user.fname
@@ -53,15 +56,15 @@ def login():
         return redirect("/dashboard")
     
     
-@app.route("/sign-up")
-def show_signup_page():
+@app.route("/signup")
+def signup_page():
     """Show user the sign up page."""
 
-    return render_template("sign-up.html")
+    return render_template("signup.html")
 
 
-@app.route("/sign-up", methods=["POST"])
-def register_user():
+@app.route("/signup", methods=["POST"])
+def signup():
     """Create a new user."""
 
     email = request.form.get("email")
@@ -73,50 +76,53 @@ def register_user():
     
     if user is not None:
         flash("An account already exists with that email. Please try another one.")
-        return redirect("/sign-up")
+        return redirect("/signup")
+
     else:
         user = crud.create_user(email, password, fname, lname)
         db.session.add(user)
         db.session.commit()
         flash("Account has been created successfully. Please log in.")
-        return redirect("/log-in")
+        return redirect("/login")
     
     
 @app.route("/dashboard")
-def show_dashboard():
+def dashboard():
     """Show user dashboard."""
 
     return render_template("dashboard.html", name=session["user_fname"], user_id=session["user_userid"])
 
 
-@app.route("/create-itinerary")
-def show_create_itinerary_page():
+@app.route("/create_itinerary")
+def create_itinerarypage():
     """Show user the create an itinerary page."""
 
-    return render_template("create-itinerary.html")
+    return render_template("create_itinerary.html")
 
 
-@app.route("/create-itinerary", methods=["POST"])
-def user_itinerary():
-    """Create an itinerary."""
+@app.route("/create_itinerary", methods=["POST"])
+def new_itinerary():
+    """Adds an itinerary to the database."""
 
+    # Get trip details from the form
     user = session["user_userid"]
     name = request.form.get("name")
     start_date = request.form.get("start-date")
     end_date = request.form.get("end-date")
 
+    # Creates a trip and adds it to the database
     itinerary = crud.create_itinerary(user, name, start_date, end_date)
     db.session.add(itinerary)
     db.session.commit()
 
-    return redirect("/customize-itinerary")
+    return redirect("/itinerary")
 
 
-@app.route("/customize-itinerary")
-def show_customize_itinerary_page():
-    """Show user the customize an itinerary page."""
+@app.route("/itinerary")
+def itinerary_page():
+    """Show user the itinerary page."""
 
-    return render_template("customize-itinerary.html")
+    return render_template("itinerary.html")
 
 
 @app.route("/view-itineraries")
@@ -138,17 +144,15 @@ def view_an_itinerary(itinerary_id):
     pass
 
 
-@app.route("/log-out")
-def logout_user():
+@app.route("/logout")
+def logout():
     """Logs a user out."""
 
     if "user_userid" in session:
-        session.pop("user_email")
-        session.pop("user_fname")
-        session.pop("user_userid")
+        session.pop("user_email", None)
+        session.pop("user_fname", None)
+        session.pop("user_userid", None)
     return redirect("/")
-
-
 
 
 if __name__ == "__main__":
