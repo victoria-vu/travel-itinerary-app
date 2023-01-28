@@ -24,56 +24,56 @@ def create_itinerary(user, name, start_date, end_date):
     return itinerary
 
 
-def create_planner(name):
-    """Create a planner within an itinerary."""
+# def create_planner(name):
+#     """Create a planner within an itinerary."""
     
-    planner = Planner(planner_name=name)
+#     planner = Planner(planner_name=name)
 
-    return planner
-
-
-def create_entry(name, date, location, time, description):
-    """Create an entry in a planner."""
-
-    entry = Entry(activity_name=name, 
-                    activity_date=date, 
-                    activity_location=location,
-                    activity_time=time,
-                    activity_description=description)
-
-    return entry
+#     return planner
 
 
-def create_todolist(list_name):
-    """Create and return a new to-do list."""
+# def create_entry(name, date, location, time, description):
+#     """Create an entry in a planner."""
+
+#     entry = Entry(activity_name=name, 
+#                     activity_date=date, 
+#                     activity_location=location,
+#                     activity_time=time,
+#                     activity_description=description)
+
+#     return entry
+
+
+# def create_todolist(list_name):
+#     """Create and return a new to-do list."""
     
-    todo_list = ToDo(list_name=list_name)
+#     todo_list = ToDo(list_name=list_name)
 
-    return todo_list
-
-
-def create_task(task):
-    """Create and return a task in a to-do list."""
-
-    task = Task(task=task)
-
-    return task
+#     return todo_list
 
 
-def create_map(name, description):
-    """Create and return a new map."""
+# def create_task(task):
+#     """Create and return a task in a to-do list."""
+
+#     task = Task(task=task)
+
+#     return task
+
+
+# def create_map(name, description):
+#     """Create and return a new map."""
     
-    map = Map(map_name=name, map_description=description)
+#     map = Map(map_name=name, map_description=description)
 
-    return map
+#     return map
 
 
-def create_location(name, latitude, longitude):
-    """Create and return a location on a map."""
+# def create_location(name, latitude, longitude):
+#     """Create and return a location on a map."""
     
-    location = Location(location_name=name, latitude=latitude, longitude=longitude)
+#     location = Location(location_name=name, latitude=latitude, longitude=longitude)
 
-    return location
+#     return location
 
 
 def get_user_by_email(email):

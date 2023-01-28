@@ -8,13 +8,12 @@ from flask import Flask, render_template, request, flash, session, redirect
 from model import connect_to_db, db
 import crud
 from jinja2 import StrictUndefined
+import os
 
 app = Flask(__name__)
 app.secret_key = "dev"
-
-# If you refer to undefined variable in a Jinja template, Jinja will ignore it.
-# We need to set an attribute of the Jinja environment that says to make this an error.
 app.jinja_env.undefined = StrictUndefined
+# FOURSQUARE_KEY = os.environ["FOURSQUARE_KEY"]
 
 
 @app.route("/")

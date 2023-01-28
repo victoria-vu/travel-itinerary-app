@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Demo: Google Maps</title>
+    <title>TravelToIt | Customize Itinerary</title>
 
     <style>
         html, body {
@@ -19,29 +19,51 @@
         }
     </style>
   </head>
+  
   <body>
-   <div>
-    <h1>Customize Your Itinerary</h1>
-   </div>
+    <div>
+        <h1>Customize Your Itinerary</h1>
+    </div>
 
-   <div>
-    <h2>Itinerary Planner</h2>
-   </div>
+    <div>
+      <h2>Itinerary Planner</h2>
+        <table border="1">
+          <tr>
+            <th>Activity</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Time</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td id="activity"></td>
+            <td id="date"></td>
+            <td id="location"></td>
+            <td id="time"></td>
+            <td id="description"></td>
+          </tr>
 
-   <div>
-    <h2>Add Destinations</h2>
-   </div>
+        </table>
+    </div>
+
+
+    <div>
+        <h2>Add Destinations</h2>
+     <nav>
+        <section id="links-left">
+          <button id="geocode-address"> Type in a Destination</button>
+        </section>
+      </nav>
+    </div>
 
 
     <section class="map">
-    <div id="map"></div>
+      <div id="map"></div>
     </section>
-    
-
-
+  
     <script src="/static/js/customizeItinerary.js"></script>
     <script async
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQPR_vJE_b_gHiQdzfz5M-IK84PYPASCg&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQPR_vJE_b_gHiQdzfz5M-IK84PYPASCg&libraries=places&callback=initMap">
     </script>
 
   </body>
