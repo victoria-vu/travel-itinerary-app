@@ -144,6 +144,15 @@ def view_an_itinerary(itinerary_id):
     pass
 
 
+@app.route("/profile/<user_id>")
+def profile(user_id):
+    """Shows a user's profile."""
+
+    user = crud.get_user_by_id(user_id)
+
+    return render_template("profile.html", user=user)
+
+
 @app.route("/logout")
 def logout():
     """Logs a user out."""

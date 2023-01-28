@@ -15,12 +15,14 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/logout" id="signupbutton">Sign Out</a>
+              <a class="nav-link" href="/profile/{{ session['user_userid']}}">My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Sign Out</a>
             </li>
           </ul>
 
         {% block head %} 
-              HEAD CONTENT GOES HERE
         {% endblock %}
     </head>
        

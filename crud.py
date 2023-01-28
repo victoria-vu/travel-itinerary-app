@@ -24,6 +24,11 @@ def create_itinerary(user, name, start_date, end_date):
     return itinerary
 
 
+def get_user_by_id(user_id):
+    """Return a user by user id."""
+
+    return User.query.get(user_id)
+
 # def create_planner(name):
 #     """Create a planner within an itinerary."""
     
