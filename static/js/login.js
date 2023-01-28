@@ -4,5 +4,7 @@
 // // When the user clicks "Log In" again after inputting their information, 
 // // the text will update and say "Log Out"
 
-// const logButton = document.querySelector('.btn btn-outline-primary me-2');
+// const logButton = document.querySelector('#loginbutton');
+
+// logButton.addEventListener()
 

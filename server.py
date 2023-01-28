@@ -20,6 +20,9 @@ app.jinja_env.undefined = StrictUndefined
 def show_homepage():
     """Show the homepage."""
 
+    if "user_userid" in session:
+        return redirect("/dashboard")
+
     return render_template("homepage.html")
 
 
@@ -133,6 +136,20 @@ def view_an_itinerary(itinerary_id):
     #Use Jinja to show everything on the page 
     
     pass
+
+
+@app.route("/log-out")
+def logout_user():
+    """Logs a user out."""
+
+    if "user_userid" in session:
+        session.pop("user_email")
+        session.pop("user_fname")
+        session.pop("user_userid")
+    return redirect("/")
+
+
+
 
 if __name__ == "__main__":
     connect_to_db(app)
